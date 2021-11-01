@@ -29,16 +29,46 @@ const reviews = [{
     },
 ];
 
-
+// set the counter
+let count = 0;
 // get the elements
 const img = document.getElementById('person-img');
 const author = document.querySelector('#author');
 const job = document.querySelector('#job');
 const info = document.querySelector('#info');
 
+// before button and next button
+const nextPrevBtns = document.querySelectorAll('.prev-btn');
+
 // random button
 const randomBtn = document.querySelector('.random-btn');
 
+// event of the next and before button
+nextPrevBtns.forEach(function(person) {
+    person.addEventListener('click', function(e) {
+        const classLi = e.currentTarget.classList;
+        if (classLi.contains('left')) {
+            count--;
+            if (count < 0) {
+                count = reviews.length - 1;
+            }
+        } else if (classLi.contains('right')) {
+            count++;
+            if (count > reviews.length - 1) {
+                count = 0;
+            }
+        }
+        img.src = reviews[count]['img'];
+        author.textContent = reviews[count]['name'];
+        job.textContent = reviews[count]['job'];
+        info.textContent = reviews[count]['text'];
+
+
+    })
+})
+
+
+// event of the rondam button
 randomBtn.addEventListener('click', function() {
     // generate a random num
     let objIndex = Math.floor(Math.random() * reviews.length);
@@ -48,4 +78,3 @@ randomBtn.addEventListener('click', function() {
     info.textContent = reviews[objIndex]['text'];
 
 })
-console.log(randomBtn);
