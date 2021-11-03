@@ -1,21 +1,19 @@
-//using selectors inside the element
-// traversing the dom
-const questionSection = document.querySelector('.question');
-const listSection = questionSection.children;
+const btns = document.querySelectorAll('.question-btn');
 
-// select the button
-const minusPlusBtn = document.querySelector('.question-btn');
-const btnSpan = minusPlusBtn.children;
-minusPlusBtn.addEventListener("click", function() {
-    if (listSection[1].classList.contains('show-text')) {
-        listSection[1].classList.remove('show-text');
-    } else {
-        listSection[1].classList.add('show-text');
-    }
-    if (listSection[1].classList.contains('question-text')) {
-        listSection[1].classList.remove('question-text');
-
-    } else {
-        listSection[1].classList.add('question-text');
-    }
+btns.forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+        const question = e.currentTarget.parentElement.parentElement;
+        question.classList.toggle('show-text')
+        console.log(question);
+    })
 })
+
+
+// const questions = document.querySelectorAll('.question');
+// questions.forEach(function(elem) {
+//     const btns = elem.querySelector('.question-btn')
+//     btns.addEventListener('click', function(e) {
+//         console.log(e);
+
+//     })
+// })
