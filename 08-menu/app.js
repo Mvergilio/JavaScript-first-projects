@@ -92,5 +92,21 @@ function createBtnElement(content) {
 }
 // append the button inside the btn-container
 
-buttonContainer.append(createBtnElement("all"), createBtnElement("shakes"), createBtnElement("breakfast"), createBtnElement("lunch"), createBtnElement("dinner"));
-console.log(buttonContainer);
+buttonContainer.append(createBtnElement("all"),
+    createBtnElement("shakes"),
+    createBtnElement("breakfast"),
+    createBtnElement("lunch"),
+    createBtnElement("dinner"));
+//console.log(buttonContainer);
+
+function showItem(index) {
+    const menuItem = document.querySelector('.menu-item');
+
+    //console.log(menuItem);
+}
+showItem()
+    // create a domloand event
+window.addEventListener("DOMContentLoaded", function() {
+        console.log('hel');
+    })
+    // creating the function that will append the elements iside the section
