@@ -71,7 +71,7 @@ const menu = [{
         desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
     },
 ];
-
+const menuDinnerCategory = menu[1].category;
 const sectionCenter = document.querySelector('.section-center');
 const title = document.querySelector('.title');
 
@@ -80,6 +80,7 @@ const title = document.querySelector('.title');
 // create a div element to serve as container for the buttons
 const appendContainer = document.createElement('div');
 const buttonContainer = title.insertAdjacentElement('afterend', appendContainer);
+buttonContainer.classList.add('btn-container');
 
 // created the window eventlistener
 window.addEventListener("DOMContentLoaded", function() {
@@ -99,8 +100,6 @@ window.addEventListener("DOMContentLoaded", function() {
     sectionCenter.innerHTML = displayMenu;
 })
 
-buttonContainer.classList.add('btn-container');
-//console.log(filterSection, sectionCenter);
 
 // create a  button
 function createBtnElement(content) {
@@ -132,7 +131,31 @@ const buttonClassL = button.classList
 
 button.forEach(function(btn) {
     btn.addEventListener('click', function(e) {
-
         let innerContentOfBtn = e.currentTarget.innerHTML;
+        let displayCategory = menu.map(function(item, index) {
+            if (item.category === innerContentOfBtn) {
+                return selectItem(item);
+            } else if (innerContentOfBtn === "all") {
+                return selectItem(item);
+            } else if (item.title === "diner double" && innerContentOfBtn === "dinner")
+                return selectItem(item);
+        })
+        displayCategory = displayCategory.join('');
+        sectionCenter.innerHTML = displayCategory;
+        console.log(innerContentOfBtn);
+        console.log(displayCategory)
     })
 })
+
+function selectItem(index) {
+    return `<article class="menu-item">
+            <img src="${index.img}" alt="menu item">
+            <div class="item-info">
+                <header>
+                    <h4>${index.title}</h4>
+                    <h4 class="price">${index.price}</h4>
+                </header>
+                <p>${index.desc}</p>
+            </div>
+        </article>`;
+}
