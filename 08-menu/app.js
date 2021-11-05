@@ -75,29 +75,49 @@ const menu = [{
 const sectionCenter = document.querySelector('.section-center');
 const title = document.querySelector('.title');
 
-// create a div element to serve as container for the buttons
 
+
+// create a div element to serve as container for the buttons
 const appendContainer = document.createElement('div');
 const buttonContainer = title.insertAdjacentElement('afterend', appendContainer);
+
+// created the window eventlistener
+window.addEventListener("DOMContentLoaded", function() {
+    let displayMenu = menu.map(function(item) {
+        return `<article class="menu-item">
+            <img src="${item.img}" alt="menu item">
+            <div class="item-info">
+                <header>
+                    <h4>${item.title}</h4>
+                    <h4 class="price">${item.price}</h4>
+                </header>
+                <p>${item.desc}</p>
+            </div>
+        </article>`
+    })
+    displayMenu = displayMenu.join('');
+    sectionCenter.innerHTML = displayMenu;
+})
+
 buttonContainer.classList.add('btn-container');
 //console.log(filterSection, sectionCenter);
 
 // create a  button
-
 function createBtnElement(content) {
     let button = document.createElement('button');
     button.classList.add('filter-btn');
     button.textContent = content;
     return button;
 }
-// append the button inside the btn-container
 
+// append the button inside the btn-container
 buttonContainer.append(createBtnElement("all"),
     createBtnElement("shakes"),
     createBtnElement("breakfast"),
     createBtnElement("lunch"),
     createBtnElement("dinner"));
 //console.log(buttonContainer);
+
 
 function showItem(index) {
     const menuItem = document.querySelector('.menu-item');
@@ -106,7 +126,13 @@ function showItem(index) {
 }
 showItem()
     // create a domloand event
-window.addEventListener("DOMContentLoaded", function() {
-        console.log('hel');
-    })
     // creating the function that will append the elements iside the section
+const button = document.querySelectorAll('.filter-btn');
+const buttonClassL = button.classList
+
+button.forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+
+        let innerContentOfBtn = e.currentTarget.innerHTML;
+    })
+})
