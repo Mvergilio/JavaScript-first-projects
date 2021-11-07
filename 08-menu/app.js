@@ -78,83 +78,123 @@ const menu = [{
         img: "./images/item-10.jpeg",
         desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
     },
+    {
+        id: 5,
+        title: "egg attack",
+        category: "dsfhfhd",
+        price: 22.99,
+        img: "./images/item-5.jpeg",
+        desc: `franzen vegan pabst bicycle rights kickstarter pinterest meditation farm-to-table 90's pop-up `,
+    },
+    {
+        id: 6,
+        title: "oreo dream",
+        category: "sdff",
+        price: 18.99,
+        img: "./images/item-6.jpeg",
+        desc: `Portland chicharrones ethical edison bulb, palo santo craft beer chia heirloom iPhone everyday`,
+    },
+    {
+        id: 7,
+        title: "bacon overflow",
+        category: "sgdf",
+        price: 8.99,
+        img: "./images/item-7.jpeg",
+        desc: `carry jianbing normcore freegan. Viral single-origin coffee live-edge, pork belly cloud bread iceland put a bird `,
+    },
+    {
+        id: 8,
+        title: "american classic",
+        category: "dinner",
+        price: 12.99,
+        img: "./images/item-8.jpeg",
+        desc: `on it tumblr kickstarter thundercats migas everyday carry squid palo santo leggings. Food truck truffaut  `,
+    },
+    {
+        id: 9,
+        title: "quarantine buddy",
+        category: "shakes",
+        price: 16.99,
+        img: "./images/item-9.jpeg",
+        desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
+    },
+    {
+        id: 10,
+        title: "dinner steak",
+        category: "asdfgasdfg",
+        price: 16.99,
+        img: "./images/item-10.jpeg",
+        desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
+    },
 ];
 
 const sectionCenter = document.querySelector('.section-center');
-const title = document.querySelector('.title');
+const buttonContainer = document.querySelector('.btn-container');
+//console.log(buttonContainer, sectionCenter);
 
-
-
-// create a div element to serve as container for the buttons
-const appendContainer = document.createElement('div');
-const buttonContainer = title.insertAdjacentElement('afterend', appendContainer);
-buttonContainer.classList.add('btn-container');
-
-// created the window eventlistener
-window.addEventListener("DOMContentLoaded", function() {
-    showItem(menu);
-    showBtn(menu);
-    // click button event
-    const btns = document.querySelectorAll('.filter-btn');
-    btns.forEach((btn) => {
-        btn.addEventListener('click', (e) => {
-            const innerContent = e.currentTarget.innerHTML;
-            if (innerContent == "all") {
-                console.log(showItem(menu));
-            }
-            let categoryItens = menu.map((item) => {
-                if (item.category === innerContent) {
-                    return `<article class="menu-item">
-                        <img src="${item.img}" alt="menu item">
-                        <div class="item-info">
-                          <header>
-                             <h4>${item.title}</h4>
-                        <h4 class="price">${item.price}</h4>
-                         </header>
-                      <p>${item.desc}</p>
-                          </div>
-                         </article>`;
-                } else {
-                    return showItem(menu);
-                }
-
-            })
-            categoryItens = categoryItens.join('');
-            sectionCenter.innerHTML = categoryItens;
-            console.log(categoryItens);
-        })
-    })
-
-})
-
-function showItem(dish) {
-    let showMenu = dish.map((item) => {
+function loadContent() {
+    let showMenu = menu.map((item) => {
         return `<article class="menu-item">
-    <img src="${item.img}" alt="menu item">
-    <div class="item-info">
-        <header>
-            <h4>${item.title}</h4>
-            <h4 class="price">${item.price}</h4>
-        </header>
-        <p>${item.desc}</p>
-    </div>
-</article>`;
+        <img src="${item.img}" alt="menu item">
+        <div class="item-info">
+            <header>
+                <h4>${item.title}</h4>
+                <h4 class="price">${item.price}</h4>
+            </header>
+            <p>${item.desc}</p>
+        </div>
+    </article>`
+
     })
     showMenu = showMenu.join('');
-    sectionCenter.innerHTML = showMenu;
+    return sectionCenter.innerHTML = showMenu;
 }
+//console.log(loadContent());
 
-function showBtn(menuItem) {
-    let category = menuItem.reduce(function(values, item) {
-        if (!values.includes(item.category)) {
-            values.push(item.category);
+function showButton() {
+    let categoryBtn = menu.reduce((values, itemValue) => {
+        if (!values.includes(itemValue.category)) {
+            values.push(itemValue.category)
         }
+
         return values;
     }, ['all'])
-
-    let categoryBtns = category.map((btn) => {
-        return `<button type="button" value="${btn}" class="filter-btn">${btn}</button>`
+    let individualBtn = categoryBtn.map((item) => {
+        return `<button type="button" class="filter-btn">${item}</button>`;
     })
-    categoryBtns = categoryBtns.join('');
-    buttonContainer.innerHTML = categoryBtns;
+    individualBtn = individualBtn.join('');
+    return buttonContainer.innerHTML = individualBtn;
 }
+//showButton();
+
+window.addEventListener('DOMContentLoaded', () => {
+    loadContent();
+    showButton();
+    const btnOnClick = document.querySelectorAll('.filter-btn');
+    btnOnClick.forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+            const currentBtn = e.currentTarget.innerHTML;
+            let displayCategory = menu.map((item) => {
+                if (item.category == currentBtn) {
+                    return `<article class="menu-item">
+                    <img src="${item.img}" alt="menu item">
+                    <div class="item-info">
+                        <header>
+                            <h4>${item.title}</h4>
+                            <h4 class="price">${item.price}</h4>
+                        </header>
+                        <p>${item.desc}</p>
+                    </div>
+                </article>`
+                }
+            })
+            displayCategory = displayCategory.join('');
+            if (currentBtn === 'all') {
+                loadContent()
+                console.log(loadContent);
+            } else {
+                sectionCenter.innerHTML = displayCategory;
+            }
+        })
+    })
+})
