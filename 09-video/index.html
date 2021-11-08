@@ -13,11 +13,19 @@
 <body>
     <header>
 
-        <video class="video-conteainer" controls muted autoplay loop>
+        <video class="video-container" muted autoplay loop>
         <source src="./video.mp4"  type="video/mp4">
         </video>
         <h1>video project</h1>
+        <button class="switch-btn">
+            <span>play</span>
+            <span>pause</span>
+            <span class="switch"></span>
+        </button>
     </header>
+    <div id="preloader" class="preloader">
+        <img src="./preloader.gif" alt="loading the page">
+    </div>
     <!-- javascript -->
     <script src="app.js"></script>
 </body>
