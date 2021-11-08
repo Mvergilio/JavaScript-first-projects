@@ -14,8 +14,5 @@ button.addEventListener('click', () => {
 })
 window.addEventListener('load', () => {
     let preloader = document.querySelector('#preloader').classList;
-    if (preloader.contains('preloader')) {
-        preloader.remove('preloader');
-        preloader.add("hide-preloader")
-    }
+    preloader.add("hide-preloader")
 })
