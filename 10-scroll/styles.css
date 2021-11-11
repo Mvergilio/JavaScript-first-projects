@@ -250,10 +250,9 @@ nav {
     color: var(--clr-secondary);
 }
 
-
-/* .fixed-nav .links-container {
+.fixed-nav .links-container {
     height: auto;
-} */
+}
 
 .nav-header {
     display: flex;

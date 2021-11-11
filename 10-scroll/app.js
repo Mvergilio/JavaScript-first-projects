@@ -19,6 +19,22 @@ function showLink(scrollPosition) {
         bouncingButton.classList.remove('show-link');
     }
 }
+
+// ******** toggle menu **********
+const links = document.querySelector('.links');
+const toggleButton = document.querySelector('.nav-toggle');
+const linkContainer = document.querySelector('.links-container');
+toggleButton.addEventListener('click', () => {
+    const linksHeight = links.getBoundingClientRect().height;
+    const containerHeight = linkContainer.getBoundingClientRect().height;
+    if (containerHeight === 0) {
+        linkContainer.style.height = `${linksHeight}px`
+    } else {
+        linkContainer.style.height = 0;
+    }
+    console.log(containerHeight, linksHeight);
+})
+
 // ********** fixed navbar ************
 const navContainer = document.querySelector('#nav');
 window.addEventListener('scroll', () => {
@@ -51,10 +67,3 @@ function goToLinks(e) {
 
     console.log(href);
 }
-// ******** toggle menu **********
-const toggleButton = document.querySelector('.nav-toggle');
-const linkContainer = document.querySelector('.links-container');
-toggleButton.addEventListener('click', () => {
-    linkContainer.classList.toggle('show-links');
-    console.log(linkContainer);
-})
