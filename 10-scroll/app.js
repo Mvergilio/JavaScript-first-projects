@@ -11,35 +11,50 @@ const currentDate = new Date().getFullYear();
 date.innerHTML = currentDate;
 
 // ********** close links ************
-const sectionLocation = document.querySelectorAll('.section');
-const sectionToLinks = document.querySelectorAll('.scroll-link');
-//console.log(sectionLocation, sectionToLinks);
+function showLink(scrollPosition) {
+    const bouncingButton = document.querySelector('.top-link')
+    if (scrollPosition >= 500) {
+        bouncingButton.classList.add('show-link')
+    } else {
+        bouncingButton.classList.remove('show-link');
+    }
+}
+// ********** fixed navbar ************
+const navContainer = document.querySelector('#nav');
+window.addEventListener('scroll', () => {
+    let windowPosition = window.scrollY;
+    showLink(windowPosition);
+    console.log(windowPosition);
+    if (windowPosition >= 48) {
+        navContainer.classList.add('fixed-nav');
+    } else {
+        navContainer.classList.remove('fixed-nav');
+    }
+
+});
+// ********** smooth scroll ************
+// select links
+sectionToLinks = document.querySelectorAll('.scroll-link');
+
 
 
 sectionToLinks.forEach((item) => {
-        item.addEventListener('click', (e) => {
-            let currentLink = e.currentTarget.innerHTML;
+    item.addEventListener('click', goToLinks)
+})
 
-            //console.log(currentLink);
-            sectionLocation.forEach((item) => {
-                let position = item.getBoundingClientRect().y.toFixed();
-                let identification = item.id;
-                if (currentLink === identification) {
-                    e.currentTarget.style.transition = '5s ease-out';
+function goToLinks(e) {
+    e.preventDefault();
+    const href = this.getAttribute("href");
+    document.querySelector(href).scrollIntoView({
+        behavior: "smooth"
+    });
 
-                }
-            })
-        })
-    })
-    // ********** fixed navbar ************
-function fixedNav() {
-    const navbar = document.querySelector('.links-container');
-    if (window.pageYOffset >= 340) {
-        return navbar.classList.add('fixed-nav');
-    } else {
-        return navbar.classList.remove('fixed-nav');
-    }
+    console.log(href);
 }
-fixedNav();
-// ********** smooth scroll ************
-// select links
+// ******** toggle menu **********
+const toggleButton = document.querySelector('.nav-toggle');
+const linkContainer = document.querySelector('.links-container');
+toggleButton.addEventListener('click', () => {
+    linkContainer.classList.toggle('show-links');
+    console.log(linkContainer);
+})
