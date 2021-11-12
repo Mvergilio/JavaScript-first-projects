@@ -32,7 +32,7 @@ toggleButton.addEventListener('click', () => {
     } else {
         linkContainer.style.height = 0;
     }
-    console.log(containerHeight, linksHeight);
+
 })
 
 // ********** fixed navbar ************
@@ -40,7 +40,6 @@ const navContainer = document.querySelector('#nav');
 window.addEventListener('scroll', () => {
     let windowPosition = window.scrollY;
     showLink(windowPosition);
-    console.log(windowPosition);
     if (windowPosition >= 48) {
         navContainer.classList.add('fixed-nav');
     } else {
@@ -50,20 +49,27 @@ window.addEventListener('scroll', () => {
 });
 // ********** smooth scroll ************
 // select links
-sectionToLinks = document.querySelectorAll('.scroll-link');
+const sectionToLinks = document.querySelectorAll('.scroll-link');
 
 
 
 sectionToLinks.forEach((item) => {
-    item.addEventListener('click', goToLinks)
+    item.addEventListener('click', (eve) => {
+        goToLinks(eve);
+    })
 })
+
+const navHeight = navContainer.getBoundingClientRect().height;
 
 function goToLinks(e) {
     e.preventDefault();
-    const href = this.getAttribute("href");
-    document.querySelector(href).scrollIntoView({
-        behavior: "smooth"
-    });
-
-    console.log(href);
+    const href = e.currentTarget.getAttribute("href").slice(1);
+    const element = document.getElementById(href);
+    let position = element.offsetTop;
+    window.scrollTo({
+        left: 0,
+        top: position,
+        behavior: "smooth",
+    })
+    console.log(navHeight);
 }
