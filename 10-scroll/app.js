@@ -65,7 +65,7 @@ function goToLinks(e) {
     e.preventDefault();
     const href = e.currentTarget.getAttribute("href").slice(1);
     const element = document.getElementById(href);
-    let position = element.offsetTop;
+    let position = element.offsetTop - navHeight;
     window.scrollTo({
         left: 0,
         top: position,
