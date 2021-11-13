@@ -56,13 +56,19 @@ const sectionToLinks = document.querySelectorAll('.scroll-link');
 sectionToLinks.forEach((item) => {
     item.addEventListener('click', (eve) => {
         goToLinks(eve);
+        linkContainer.style.height = 0;
     })
 })
 
-const navHeight = navContainer.getBoundingClientRect().height;
+
+let navHeight = navContainer.getBoundingClientRect().height;
 
 function goToLinks(e) {
     e.preventDefault();
+
+    if (navHeight < 82) {
+        navHeight = 82;
+    }
     const href = e.currentTarget.getAttribute("href").slice(1);
     const element = document.getElementById(href);
     let position = element.offsetTop - navHeight;
