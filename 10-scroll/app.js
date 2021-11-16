@@ -37,6 +37,8 @@ toggleButton.addEventListener('click', () => {
 
 // ********** fixed navbar ************
 const navContainer = document.querySelector('#nav');
+const navContainerHeight = navContainer.getBoundingClientRect().height;
+console.log(navContainerHeight);
 window.addEventListener('scroll', () => {
     let windowPosition = window.scrollY;
     showLink(windowPosition);
@@ -56,26 +58,31 @@ const sectionToLinks = document.querySelectorAll('.scroll-link');
 sectionToLinks.forEach((item) => {
     item.addEventListener('click', (eve) => {
         goToLinks(eve);
-        linkContainer.style.height = 0;
     })
 })
 
 
 let navHeight = navContainer.getBoundingClientRect().height;
+let linksContainerHeight = linkContainer.getBoundingClientRect().height
 
 function goToLinks(e) {
     e.preventDefault();
-
-    if (navHeight < 82) {
-        navHeight = 82;
-    }
+    const showLinkClass = navContainer.classList.contains('fixed-nav');
     const href = e.currentTarget.getAttribute("href").slice(1);
     const element = document.getElementById(href);
     let position = element.offsetTop - navHeight;
+    if (!showLinkClass) {
+        position -= navHeight;
+    }
+    if (navHeight > 82) {
+        position += linksContainerHeight;
+        console.log(position)
+
+    }
     window.scrollTo({
         left: 0,
         top: position,
         behavior: "smooth",
     })
-    console.log(navHeight);
+    linkContainer.style.height = 0;
 }
