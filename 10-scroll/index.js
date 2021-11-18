@@ -53,15 +53,25 @@ linksToSection.forEach((item) => {
     item.addEventListener('click', (e) => {
         //prevent defaut setting
         e.preventDefault();
+        const linksContainerHeight = linksContainer.getBoundingClientRect().height;
+        const navContainerHeight = navContainer.getBoundingClientRect().height;
         const sectionId = e.currentTarget.getAttribute('href').slice(1);
         const eachSectionToGo = document.getElementById(sectionId);
-        const sectionPosition = eachSectionToGo.offsetTop;
+        let sectionPosition = eachSectionToGo.offsetTop - navContainerHeight;
+        const navClassList = navContainer.classList.contains('fixed-nav');
+        if (!navClassList) {
+            sectionPosition -= navContainerHeight;
+        }
+        if (navContainerHeight > 82) {
+            sectionPosition += linksContainerHeight;
+        }
+        console.log(navContainerHeight);
         window.scrollTo({
             left: 0,
             behavior: "smooth",
             top: sectionPosition
         })
-
+        linksContainer.style.height = 0;
 
     })
 })
