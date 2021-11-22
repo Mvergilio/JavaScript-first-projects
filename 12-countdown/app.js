@@ -23,18 +23,44 @@ const weekdays = [
 ];
 
 // get the days/hours/minutes/seconds tags
-const days = document.querySelector('.days');
-const hours = document.querySelector('.hours');
-const minutes = document.querySelector('.mins');
-const seconds = document.querySelector('.secs');
+const giveAway = document.querySelector('.giveaway');
+const item = document.querySelectorAll('.deadline-format h4');
+const deadLine = document.querySelector('.deadline');
 
-// setting the current Date and the noted Date
-const currentDate = new Date().getTime();
-const notedDate = new Date('December 25,  2021 8:00:00 GMT+00:00').getTime();
-const dayElapse = notedDate - currentDate;
-// days
-const acurateDay = Math.ceil(dayElapse / (1000 * 3600 * 24));
-console.log(acurateDay);
-days.innerHTML = acurateDay;
-// hours
-const acurateHour = Math.ceil(dayElapse / (1000 * 3600));
+// setting the current Date and the future Date
+let futureDate = new Date(2021, 11, 01, 11, 01, 0);
+const weekday = weekdays[futureDate.getDay()];
+const date = futureDate.getDate();
+const month = months[futureDate.getMonth()]
+const year = futureDate.getFullYear();
+const hours = futureDate.getHours();
+const minutes = futureDate.getMinutes();
+// console.log(futureDate)
+giveAway.textContent = `giveaway end on ${weekday}, ${date} ${month} ${year}, ${hours}:${minutes}am`;
+
+// Setting the CountDown logic
+const FUTURE_TIME = new Date(futureDate).getTime();
+
+//get time in milisecs
+function getMilisecToDay() {
+    const TODAY = new Date().getTime();
+    let t = FUTURE_TIME - TODAY;
+    const ONE_DAY = 24 * 60 * 60 * 1000;
+    const ONE_HOUR = 60 * 60 * 1000;
+    const ONE_MIN = 60 * 1000;
+
+    //remider
+
+    // days
+    let days = Math.floor(t / ONE_DAY);
+
+    // hours
+    let hourRemider = t / ONE_DAY;
+    let hours = hourRemider.toString().slice(2);
+
+    // minuts
+    let minRemider = hours % ONE_HOUR;
+    console.log(hourRemider, hours);
+
+}
+getMilisecToDay();
