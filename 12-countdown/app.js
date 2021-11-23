@@ -53,15 +53,25 @@ function getMilisecToDay() {
 
     // days
     let days = Math.floor(t / ONE_DAY);
-
+    item[0].textContent = days;
     // hours
-    let hourRemider = t / ONE_DAY;
-    let hours = hourRemider.toString().slice(2);
-    let numHours = Number(hours);
-    let newHours = Math.floor(numHours / ONE_HOUR)
-        // minuts
-    let minRemider = hours % ONE_HOUR;
-    console.log(hours, newHours, days, ONE_HOUR);
+    let hourRemider = t / ONE_HOUR;
+    let preciseHour = (days * 24)
+    let hours = Math.floor(hourRemider - preciseHour);
+    item[1].textContent = hours;
+
+    // minuts
+    let minRemider = (t / ONE_MIN) - preciseHour * 60;
+    let preciseMin = hours * 60;
+    let minutes = Math.floor(minRemider - preciseMin);
+    item[2].textContent = minutes;
+
+    // seconds
+    let remiderSec = (minRemider * 1000) - (preciseMin * 1000);
+    let preciseSec = minutes * 1000;
+    let seconds = remiderSec - preciseSec;
+
+    console.log(item, remiderSec, preciseSec, seconds);
 
 }
 getMilisecToDay();
