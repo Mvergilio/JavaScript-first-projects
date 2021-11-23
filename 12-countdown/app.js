@@ -57,10 +57,11 @@ function getMilisecToDay() {
     // hours
     let hourRemider = t / ONE_DAY;
     let hours = hourRemider.toString().slice(2);
-
-    // minuts
+    let numHours = Number(hours);
+    let newHours = Math.floor(numHours / ONE_HOUR)
+        // minuts
     let minRemider = hours % ONE_HOUR;
-    console.log(hourRemider, hours);
+    console.log(hours, newHours, days, ONE_HOUR);
 
 }
 getMilisecToDay();
