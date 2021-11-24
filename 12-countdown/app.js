@@ -47,6 +47,7 @@ giveAway.textContent = `giveaway end on ${weekday}, ${date} ${month} ${year}, ${
 // Setting the CountDown logic
 const FUTURE_TIME = new Date(futureDate).getTime();
 
+
 //get time in milisecs
 function getMilisecToDay() {
     const TODAY = new Date().getTime();
@@ -76,8 +77,11 @@ function getMilisecToDay() {
     let preciseSec = (minutes * ONE_MIN) + (days * ONE_DAY) + (hours * ONE_HOUR);
     let seconds = Math.floor((t - preciseSec) / 1000);
     item[3].textContent = seconds;
+    if (t < 0) {
+        deadLine.innerHTML = `<h4 class="expired">sorry, but his giveaway has already expired</h4>`;
+    }
 
 }
-setInterval(() => {
+let intervel = setInterval(() => {
     getMilisecToDay();
 }, 300)
