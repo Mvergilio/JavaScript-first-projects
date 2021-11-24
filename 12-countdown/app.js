@@ -27,8 +27,15 @@ const giveAway = document.querySelector('.giveaway');
 const item = document.querySelectorAll('.deadline-format h4');
 const deadLine = document.querySelector('.deadline');
 
-// setting the current Date and the future Date
-let futureDate = new Date(2021, 11, 01, 08, 01, 0);
+//setting the future to always be 10 days from now
+let tempdate = new Date();
+let tempYear = tempdate.getFullYear();
+let tempMonth = tempdate.getMonth();
+let tempDay = tempdate.getDate();
+console.log(tempDay)
+console.log(tempdate)
+    // setting the current Date and the future Date
+let futureDate = new Date(tempYear, tempMonth, tempDay + 10, 08, 01, 0);
 const weekday = weekdays[futureDate.getDay()];
 const date = futureDate.getDate();
 const month = months[futureDate.getMonth()]
