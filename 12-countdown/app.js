@@ -28,14 +28,20 @@ const item = document.querySelectorAll('.deadline-format h4');
 const deadLine = document.querySelector('.deadline');
 
 // setting the current Date and the future Date
-let futureDate = new Date(2021, 11, 01, 11, 01, 0);
+let futureDate = new Date(2021, 11, 01, 08, 01, 0);
 const weekday = weekdays[futureDate.getDay()];
 const date = futureDate.getDate();
 const month = months[futureDate.getMonth()]
 const year = futureDate.getFullYear();
-const hours = futureDate.getHours();
-const minutes = futureDate.getMinutes();
+let hours = futureDate.getHours();
+let minutes = futureDate.getMinutes();
 // console.log(futureDate)
+if (minutes < 10) {
+    minutes = "0" + String(minutes)
+}
+if (hours < 10) {
+    hours = "0" + String(hours)
+}
 giveAway.textContent = `giveaway end on ${weekday}, ${date} ${month} ${year}, ${hours}:${minutes}am`;
 
 // Setting the CountDown logic
@@ -67,11 +73,11 @@ function getMilisecToDay() {
     item[2].textContent = minutes;
 
     // seconds
-    let remiderSec = (minRemider * 1000) - (preciseMin * 1000);
-    let preciseSec = minutes * 1000;
-    let seconds = remiderSec - preciseSec;
-
-    console.log(item, remiderSec, preciseSec, seconds);
+    let preciseSec = (minutes * ONE_MIN) + (days * ONE_DAY) + (hours * ONE_HOUR);
+    let seconds = Math.floor((t - preciseSec) / 1000);
+    item[3].textContent = seconds;
 
 }
-getMilisecToDay();
+setInterval(() => {
+    getMilisecToDay();
+}, 300)
