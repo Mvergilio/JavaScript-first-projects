@@ -11,4 +11,37 @@ I just told you! You've killed me! Fry! Quit doing the right thing, you jerk! Mi
     `Man braid celiac synth freegan readymade, pitchfork fam salvia waistcoat lomo bitters gentrify four loko. Pitchfork semiotics post-ironic vegan. Tofu meditation microdosing hashtag semiotics venmo. Flexitarian vape tilde taiyaki. Prism poutine farm-to-table, messenger bag vegan taxidermy tattooed sartorial squid jean shorts fixie selvage trust fund vape.`,
     `Rutters Plate Fleet boom chandler Brethren of the Coast handsomely lookout marooned brigantine knave. Buccaneer gangway jack rum loot spyglass line Jack Tar fore gaff. Gaff topmast scuttle ballast swab draught measured fer yer chains dance the hempen jig Chain Shot yardarm.`,
 ];
-console.log(text.length)
+
+
+// selecting the elements 
+const NUMBER_INPUT = document.getElementById("amount");
+const PLACE_HOLDER_ARTICLE = document.querySelector(".lorem-text");
+const SUBMIT_BUTTON = document.querySelector('.btn');
+
+// seting event listener for the input case less than 0
+NUMBER_INPUT.addEventListener('click', () => {
+        if (NUMBER_INPUT.valueAsNumber <= 0) {
+            NUMBER_INPUT.valueAsNumber = 0;
+        }
+    })
+    // setting the event listenner for the button
+SUBMIT_BUTTON.addEventListener('click', () => {
+    let valueAsNumber = NUMBER_INPUT.valueAsNumber;
+    let romdomNumber = Math.floor(Math.random() * text.length)
+
+    //increment
+    let i = 0;
+    let articleText = "";
+
+    while (i < valueAsNumber) {
+        let romdomNumber2 = Math.floor(Math.random() * text.length)
+        articleText += `<p>${text[romdomNumber2]}</p>`
+        i++;
+    }
+    PLACE_HOLDER_ARTICLE.innerHTML = articleText;
+    if (valueAsNumber <= 0) {
+        PLACE_HOLDER_ARTICLE.innerHTML = `<p class="result">${text[romdomNumber]}</p>`
+
+    }
+
+})
