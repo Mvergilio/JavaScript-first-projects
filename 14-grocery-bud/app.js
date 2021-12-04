@@ -16,9 +16,13 @@ SUBMIT_BTN.addEventListener('click', (e) => {
     // ****** FUNCTIONS **********
     // show what were typed inside the div
 function textInputcollecting(textinput) {
+
+    // creating the article tag and adding the class to it
+    let article = document.createElement("article");
+
+    article.classList.add("grocery-item");
     const INPUT_VALUE = textinput.value;
-    const PLACE_HOLDER = `<article class="grocery-item">
-    <p class="title">${INPUT_VALUE}</p>
+    const PLACE_HOLDER = `<p class="title">${INPUT_VALUE}</p>
     <div class="btn-container">
         <button class="edit-btn">
           <i class="fas fa-edit"></i>
@@ -26,12 +30,27 @@ function textInputcollecting(textinput) {
         <button class="delete-btn">
           <i class="fas fa-trash"></i>
         </button>
+    </div>`
 
-    </div>
-</article>`
-    GROCERY_CONTAINER.write(PLACE_HOLDER);
+    if (!INPUT_VALUE) {
+        ALERT.textContent = "Item not added to the item"
+        ALERT.style.color = "red";
+        setInterval(() => {
+            ALERT.textContent = "";
+        }, 1000);
+    } else {
 
-    console.log(textinput)
+        article.innerHTML = PLACE_HOLDER;
+        GROCERY_CONTAINER.append(article);
+
+        ALERT.textContent = "item added to list"
+        ALERT.style.color = "green";
+        setInterval(() => {
+            ALERT.textContent = "";
+        }, 3000);
+        clearTimeout();
+    }
+
 }
 
 // ****** LOCAL STORAGE **********
