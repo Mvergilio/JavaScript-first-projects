@@ -16,7 +16,7 @@ SUBMIT_BTN.addEventListener('click', (e) => {
     // ****** FUNCTIONS **********
     // show what were typed inside the div
 function textInputcollecting(textinput) {
-    let inter = null;
+
 
     // creating the article tag and adding the class to it
     let article = document.createElement("article");
@@ -56,12 +56,18 @@ function textInputcollecting(textinput) {
 
 BUTTON_CONTAINER.forEach(element => {
     element.addEventListener('click', (e) => {
-        let pContent = element.previousSibling.classList;
-        e = e || window.EventTarget.parentNode;
+        e = e || window.event;
+        let target = e.target || e.Event;
 
-        console.log(pContent);
-    })
-});
+        let textTarget = null;
+        if (target.parentElement.classList == "edit-btn") {
+            textTarget = target.parentElement.parentElement.parentElement.querySelector(".title");
+            textTarget = textTarget.innerText;
+            INPUT_TEXT.textContent = textTarget;
+        }
+    }, false);
+})
+
 // ****** LOCAL STORAGE **********
 
 // ****** SETUP ITEMS **********
