@@ -3,7 +3,7 @@ const ALERT = document.querySelector('.alert');
 const INPUT_TEXT = document.getElementById('grocery');
 const SUBMIT_BTN = document.querySelector('.submit-btn');
 const TEXT_TITLE = document.querySelector('.title');
-const BUTTON_CONTAINER = document.querySelector('.btn-container');
+const BUTTON_CONTAINER = document.querySelectorAll('.btn-container');
 const CLEAR_BTN = document.querySelector('.clear-btn');
 const GROCERY_CONTAINER = document.querySelector('.grocery-list');
 // edit option
@@ -16,6 +16,7 @@ SUBMIT_BTN.addEventListener('click', (e) => {
     // ****** FUNCTIONS **********
     // show what were typed inside the div
 function textInputcollecting(textinput) {
+    let inter = null;
 
     // creating the article tag and adding the class to it
     let article = document.createElement("article");
@@ -35,7 +36,7 @@ function textInputcollecting(textinput) {
     if (!INPUT_VALUE) {
         ALERT.textContent = "Item not added to the item"
         ALERT.style.color = "red";
-        setInterval(() => {
+        setTimeout(() => {
             ALERT.textContent = "";
         }, 1000);
     } else {
@@ -45,14 +46,22 @@ function textInputcollecting(textinput) {
 
         ALERT.textContent = "item added to list"
         ALERT.style.color = "green";
-        setInterval(() => {
+        setTimeout(() => {
             ALERT.textContent = "";
-        }, 3000);
-        clearTimeout();
+        }, 1000);
+
     }
 
 }
 
+BUTTON_CONTAINER.forEach(element => {
+    element.addEventListener('click', (e) => {
+        let pContent = element.previousSibling.classList;
+        e = e || window.EventTarget.parentNode;
+
+        console.log(pContent);
+    })
+});
 // ****** LOCAL STORAGE **********
 
 // ****** SETUP ITEMS **********
