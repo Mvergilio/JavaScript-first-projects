@@ -63,7 +63,7 @@ BUTTON_CONTAINER.forEach(element => {
         if (target.parentElement.classList == "edit-btn") {
             textTarget = target.parentElement.parentElement.parentElement.querySelector(".title");
             textTarget = textTarget.innerText;
-            INPUT_TEXT.textContent = textTarget;
+            INPUT_TEXT.value = textTarget;
         }
     }, false);
 })
