@@ -7,13 +7,13 @@ const SUBMIT_BTN = document.querySelector('.submit-btn');
 const CLEAR_BTN = document.querySelector('.clear-btn');
 const GROCERY_CONTAINER = document.querySelector('.grocery-list');
 // edit option
-
+let holder = null;
 // ****** EVENT LISTENERS **********
 
 SUBMIT_BTN.addEventListener('click', (e) => {
         e.preventDefault();
         storingItem()
-        textInputcollecting();
+
 
 
 
@@ -62,6 +62,7 @@ BUTTON_CONTAINER.forEach(element => {
             TargetP = target.parentElement.parentElement.parentElement.querySelector(".title");
             textTargetP = TargetP.innerText;
             INPUT_TEXT.value = textTargetP;
+
         }
     }, false);
 })
