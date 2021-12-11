@@ -11,12 +11,15 @@ let holder = null;
 // ****** EVENT LISTENERS **********
 
 SUBMIT_BTN.addEventListener('click', (e) => {
-        e.preventDefault();
-        storingItem()
-
-
-
-
+    e.preventDefault();
+    storingItem()
+})
+SUBMIT_BTN.addEventListener('storage', (e) => {
+    console.log(e.newValue)
+})
+CLEAR_BTN.addEventListener('click', () => {
+        localStorage.clear();
+        location.reload();
     })
     // ****** LOCAL STORAGE **********
 function storingItem() {
@@ -36,7 +39,14 @@ function storingItem() {
     if (textValueKey) {
         localStorage.setItem(textValueKey, textHolderValue);
         location.reload();
+        ALERT.innerText = "item added";
+        ALERT.style.color = "green"
+        setTimeout(() => {
+            ALERT.innerText = "";
+        }, 1000)
+
     }
+
 }
 for (let i = 0; i < localStorage.length; i++) {
     let key = localStorage.key(i);
@@ -62,7 +72,28 @@ BUTTON_CONTAINER.forEach(element => {
             TargetP = target.parentElement.parentElement.parentElement.querySelector(".title");
             textTargetP = TargetP.innerText;
             INPUT_TEXT.value = textTargetP;
+            localStorage.removeItem(textTargetP)
+            ALERT.innerText = "item selected";
+            ALERT.style.color = "blue"
+            setTimeout(() => {
+                ALERT.innerText = "";
+            }, 1000)
 
+        } else if (target.parentElement.classList = "delete-btn") {
+            TargetP = target.parentElement.parentElement.parentElement.querySelector(".title");
+            textTargetP = TargetP.innerText;
+            if (localStorage.length == 1) {
+                localStorage.clear();
+                location.reload();
+            } else {
+                localStorage.removeItem(textTargetP);
+                location.reload();
+            }
+            ALERT.innerText = "item removed";
+            ALERT.style.color = "red"
+            setTimeout(() => {
+                ALERT.innerText = "";
+            }, 1000)
         }
     }, false);
 })
