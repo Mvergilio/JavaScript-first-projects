@@ -17,12 +17,7 @@ let value = null;
 // ****** EVENT LISTENERS **********
 FORM.addEventListener("submit", addItem);
 CLEAR_BTN.addEventListener("click", clearAll);
-window.addEventListener('DOMContentLoaded', () => {
-    let items = checkLocalStorage();
-    items.map((item) => {
-
-    })
-})
+window.addEventListener('DOMContentLoaded', setupItems)
 
 // ****** FUNCTIONS **********
 
@@ -31,10 +26,10 @@ function addItem(e) {
     e.preventDefault();
     id = new Date().getTime();
     value = INPUT_TEXT.value;
-    let article = showContent(id, value);
 
     if (value && !editFlag) {
-        LIST_CONTAINER.appendChild(article);
+        showContent(id, value);
+
         CONTAINER.classList.add("show-container");
         showAlert("item added to the list", "success");
         setBackToDefault();
@@ -123,7 +118,7 @@ function editLocalStorage(id, value) {
         return item;
     })
 
-    localStorage.removeItem("list");
+
     localStorage.setItem("list", JSON.stringify(items))
 
 }
@@ -136,7 +131,7 @@ function deleteFromLocalStorage(id) {
         }
         return true;
     })
-    localStorage.removeItem('list');
+
     localStorage.setItem('list', JSON.stringify(items))
 
 }
@@ -148,6 +143,16 @@ function checkLocalStorage() {
 
 
 // ****** SETUP ITEMS **********
+function setupItems() {
+    let items = checkLocalStorage();
+    if (items.length > 0) {
+        items.forEach((item) => {
+            showContent(item.id, item.value);
+        })
+        CONTAINER.classList.add('show-container');
+    }
+}
+
 function showContent(id, value) {
     let article = document.createElement("article");
     article.classList.add("grocery-item");
@@ -162,7 +167,7 @@ function showContent(id, value) {
         </button>
         </div>`;
     article.innerHTML = place_holder;
-
+    LIST_CONTAINER.appendChild(article);
     // setting the edit and delete button
     const EDIT_BTN = document.querySelectorAll(".edit-btn");
     const DELETE_BTN = document.querySelectorAll(".delete-btn");
